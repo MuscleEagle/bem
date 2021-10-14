@@ -12,14 +12,14 @@ read YourCachePath
 echo "Delete Nginx Default Config File!"
 rm -f $NginxDefaultFile
 echo "Download new.conf"
-wget -O $NginxDefaultFile https://raw.githubusercontent.com/MuscleEagle/zzinzzuptest/main/new.conf
+wget -O $NginxDefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/new.conf
 echo "Fill Custom Setting"
 sed -i "s/YourDomainName/${YourDomain}/g" $NginxDefaultFile
 
 echo "Delete Old Nginx Custom Config File!"
 rm -f $NginxCustomFile
 echo "Download custom.conf"
-wget -O $NginxCustomFile https://raw.githubusercontent.com/MuscleEagle/zzinzzuptest/main/custom.conf
+wget -O $NginxCustomFile https://raw.githubusercontent.com/MuscleEagle/bem/main/custom.conf
 echo "Fill Custom Setting"
 sed -i "s/YourDomainName/${YourDomain}/g" $NginxCustomFile
 sed -i "s/YourCachePath/${YourCachePath}/g" $NginxCustomFile
