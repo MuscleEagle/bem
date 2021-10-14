@@ -37,4 +37,5 @@ int main()
    fprintf(fp, "sed -i \"s/YourIdWS/%s/g\" $DefaultFile\n", strWSID);
   
    fclose(fp);
+   return 1;
 }
