@@ -49,19 +49,5 @@
     "outbounds": [{
          "protocol": "freedom",
          "settings": {}
-    }],
-    "routing": {
-        "rules": [{
-                "type": "field",
-                "domain": [
-                    "domain:google.com"
-                ],
-                "outboundTag": "ip4-out"
-            }, {
-                "type": "field",
-                "ip": ["geoip:private"],
-                "outboundTag": "blocked"
-            }
-        ]
-    }
+    }]
 }
