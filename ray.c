@@ -29,7 +29,7 @@ int main()
    fp = fopen("ray.sh", "w");
  
    fprintf(fp, "#!/bin/bash\n");
-   fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json", strKCP);
+   fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json\n", strKCP);
    fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/zzinzzuptest/main/config.json\n");
    
    fprintf(fp, "sed -i \"s/YourPortKCP/%d/g\" $DefaultFile\n", iKCP);
