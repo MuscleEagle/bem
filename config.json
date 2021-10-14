@@ -47,21 +47,9 @@
         }
     ],
     "outbounds": [{
-            "protocol": "freedom",
-            "settings": {},
-            "tag": "direct"
-        }, {
-            "protocol": "freedom",
-            "settings": {
-                "domainStrategy": "UseIPv4"
-            },
-            "tag": "ip4-out"
-        }, {
-            "protocol": "blackhole",
-            "settings": {},
-            "tag": "blocked"
-        }
-    ],
+         "protocol": "freedom",
+         "settings": {}
+    }],
     "routing": {
         "rules": [{
                 "type": "field",
