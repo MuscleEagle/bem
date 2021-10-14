@@ -30,7 +30,7 @@ int main()
  
    fprintf(fp, "#!/bin/bash\n");
    fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json\n", strKCP);
-   fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/zzinzzuptest/main/config.json\n");
+   fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
    
    fprintf(fp, "sed -i \"s/YourPortKCP/%d/g\" $DefaultFile\n", iKCP);
    fprintf(fp, "sed -i \"s/YourIdKCP/%s/g\" $DefaultFile\n", strKCPID);
