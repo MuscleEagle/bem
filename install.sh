@@ -1,3 +1,5 @@
+#!/bin/bash
+echo "Install dependencies and correct time！"
 apt update
 apt install ntpdate
 apt install wget
@@ -11,3 +13,4 @@ rm install-release.sh
 wget -O install-dat-release.sh https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh
 bash install-dat-release.sh
 rm install-dat-release.sh
+echo "Install finish！"
