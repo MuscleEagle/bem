@@ -27,7 +27,7 @@
             "protocol": "vmess",
             "settings": {
                 "clients": [{
-                        "id": "YourIdKcp",
+                        "id": "YourIdKCP",
                         "level": 1,
                         "alterId": 64
                     }
