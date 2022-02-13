@@ -26,7 +26,7 @@ int main()
    scanf("%s %d", strWS, &iWS);
    
    FILE *fp = NULL;
-   fp = fopen("ray.sh", "w");
+   fp = fopen("rayuuid.sh", "w");
  
    fprintf(fp, "#!/bin/bash\n");
    fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json\n", strKCP);
