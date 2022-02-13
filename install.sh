@@ -5,6 +5,7 @@ apt install ntpdate -y
 apt install wget -y
 apt install curl -y
 apt install gcc -y
+apt install uuid-dev
 apt install nginx -y
 apt install certbot -y
 echo "Correct time..."
