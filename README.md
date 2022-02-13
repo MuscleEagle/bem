@@ -1,3 +1,6 @@
 # bem
 
-Install.bash
+wget https://raw.githubusercontent.com/MuscleEagle/bem/master/Install.sh
+
+reboot
+
