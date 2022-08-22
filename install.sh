@@ -12,10 +12,10 @@ apt install certbot -y
 echo "Correct time..."
 ntpdate cn.pool.ntp.org
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-wget -O install-release.sh https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
-bash install-release.sh
-rm install-release.sh
-wget -O install-dat-release.sh https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh
-bash install-dat-release.sh
-rm install-dat-release.sh
+echo "Create bemray project..."
+wget -O bemray.c https://raw.githubusercontent.com/MuscleEagle/bem/main/bemray.c
+gcc ray.c -luuid -o bemray
+./bemray
+bash dependencies.sh
+bash modifyconfig.sh
 echo "Install finish！"
