@@ -191,45 +191,5 @@ int main()
 		}
 		fclose(fp);
 	}
-
-	{
-		//modify config file
-		FILE *fp = NULL;
-		fp = fopen("modifyconfig.sh", "w");
- 
-		fprintf(fp, "#!/bin/bash\n");
-		fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/default.conf\n");
-		fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/custom.conf\n");
-		fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json\n", sData.strProject);
-		
-		fprintf(fp, "echo \"Delete Old Nginx Default Config File!\"\n");
-		fprintf(fp, "rm -f $NginxDefaultFile\n");
-		fprintf(fp, "echo \"Download new default.conf\"\n");
-		fprintf(fp, "wget -O $NginxDefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/new.conf\n");
-		fprintf(fp, "echo \"Fill Custom Setting\"\n");
-		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxDefaultFile\n", sData.strDomain);
-		
-		fprintf(fp, "echo \"Delete Old Nginx Custom Config File!\"\n");
-		fprintf(fp, "rm -f $NginxCustomFile\n");
-		fprintf(fp, "echo \"Download new custom.conf\"\n");
-		fprintf(fp, "wget -O $NginxCustomFile https://raw.githubusercontent.com/MuscleEagle/bem/main/custom.conf\n");
-		fprintf(fp, "echo \"Fill Custom Setting\"\n");
-		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxCustomFile\n", sData.strDomain);
-		fprintf(fp, "sed -i \"s/YourCachePath/%s/g\" $NginxCustomFile\n", sData.strCachePath);
-		fprintf(fp, "sed -i \"s/YourPort/%s/g\" $NginxCustomFile\n", sData.strCachePort);
-		
-		fprintf(fp, "echo \"Download new config.json\"\n");
-		fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
-		fprintf(fp, "echo \"Fill Custom Setting\"\n");
-   
-		fprintf(fp, "sed -i \"s/YourPortKCP/%s/g\" $DefaultFile\n", sData.strKindPort);
-		fprintf(fp, "sed -i \"s/YourIdKCP/%s/g\" $DefaultFile\n", sData.strKindID);
-  
-		fprintf(fp, "sed -i \"s/YourPathWS/%s/g\" $DefaultFile\n", sData.strCachePath);
-		fprintf(fp, "sed -i \"s/YourPortWS/%s/g\" $DefaultFile\n", sData.strCachePort);
-		fprintf(fp, "sed -i \"s/YourIdWS/%s/g\" $DefaultFile\n", sData.strCacheID);
-  
-		fclose(fp);
-	}
 	return 1;
 }
