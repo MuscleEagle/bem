@@ -66,7 +66,7 @@ int main()
 		
 		//modify config file
 		FILE *fp = NULL;
-		fp = fopen("rayuuid.sh", "w");
+		fp = fopen("modifyconfig.sh", "w");
  
 		fprintf(fp, "#!/bin/bash\n");
 		fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/default.conf\n");
@@ -93,11 +93,11 @@ int main()
 		fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
 		fprintf(fp, "echo \"Fill Custom Setting\"\n");
    
-		fprintf(fp, "sed -i \"s/YourPortKCP/%d/g\" $DefaultFile\n", iKCP);
+		fprintf(fp, "sed -i \"s/YourPortKCP/%d/g\" $DefaultFile\n", nKCPPort);
 		fprintf(fp, "sed -i \"s/YourIdKCP/%s/g\" $DefaultFile\n", strKCPID);
   
 		fprintf(fp, "sed -i \"s/YourPathWS/%s/g\" $DefaultFile\n", strCachePath);
-		fprintf(fp, "sed -i \"s/YourPortWS/%d/g\" $DefaultFile\n", iWS);
+		fprintf(fp, "sed -i \"s/YourPortWS/%d/g\" $DefaultFile\n", nCachePort);
 		fprintf(fp, "sed -i \"s/YourIdWS/%s/g\" $DefaultFile\n", strWSID);
   
 		fclose(fp);
