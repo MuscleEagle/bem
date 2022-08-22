@@ -15,6 +15,7 @@ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 echo "Create bemray project..."
 wget -O bemray.c https://raw.githubusercontent.com/MuscleEagle/bem/main/bemray.c
 gcc bemray.c -luuid -o bemray
+echo "Run bemray..."
 ./bemray
 bash dependencies.sh
 bash modifyconfig.sh
