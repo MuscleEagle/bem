@@ -1,6 +1,6 @@
 # bem
 
-wget -O install-dat-release.sh https://raw.githubusercontent.com/MuscleEagle/bem/main/install.sh
+wget -O install.sh https://raw.githubusercontent.com/MuscleEagle/bem/main/install.sh
 
 # reboot
 
