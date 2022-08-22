@@ -37,26 +37,28 @@ int main()
 	scanf("%d", &nKCPPort);
 	
 	{
+		char cInput = 'Y';
+		char strDomainBash[128] = "domain.sh";
+		char strProjectBash[128] = "projcet.sh";
 		//install dependencies
 		FILE *fp = NULL;
 		fp = fopen("dependencies.sh", "w");
 	
-		fprintf(fp, "#!/bin/bash\n");
-		fprintf(fp, "echo \"Install ACME!\"\n");
-		fprintf(fp, "wget -O -  https://get.acme.sh | sh -s email=admin@%s\n", strDomain);
-		fprintf(fp, "/root/.acme.sh/acme.sh --issue -d %s --nginx\n", strDomain);
-		fprintf(fp, "/root/.acme.sh/acme.sh --upgrade --auto-upgrade\n");
-		fprintf(fp, "echo \"ACME is ready!\"\n");
-	
-		fprintf(fp, "echo \"Install %s!\"\n", strProject);
-		fprintf(fp, "wget -O install-release.sh https://raw.githubusercontent.com/%s/fhs-install-%s/master/install-release.sh\n", strProject, strProject);
-		fprintf(fp, "wget -O install-dat-release.sh https://raw.githubusercontent.com/%s/fhs-install-%s/master/install-dat-release.sh\n", strProject, strProject);
-		fprintf(fp, "bash install-release.sh\n");
-		fprintf(fp, "rm install-release.sh\n");
-		fprintf(fp, "bash install-dat-release.sh\n");
-		fprintf(fp, "rm install-dat-release.sh\n");
-		fprintf(fp, "echo \"%s is ready!\"\n", strProject);
-	
+		fprintf(fp, "sed -i \"s/YourDomain/%s/g\" %s\n", strDomain, strDomainBash);
+		fprintf(fp, "sed -i \"s/YourProject/%s/g\" %s\n", strProject, strProjectBash);
+		
+		printf( "Bash domain.sh?[Y/n]:");
+		cInput = getch();
+		if(cInput == 'Y' || cInput == 'y'){
+			fprintf(fp, "bash domain.sh\n");
+			printf("domain.sh is on the way!\n");		
+		}
+		printf( "Bash project.sh?[Y/n]:");
+		cInput = getch();
+		if(cInput == 'Y' || cInput == 'y'){
+			fprintf(fp, "bash project.sh\n");
+			printf("project.sh is on the way!\n");
+		}
 		fclose(fp);
 	}
 
