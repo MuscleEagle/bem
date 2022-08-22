@@ -46,7 +46,7 @@ int main()
 		
 		fprintf(fp, "#!/bin/bash\n");
 		printf( "Bash domain.sh?[Y/n]:");
-		cInput = getc();
+		cInput = getchar();
 		if(cInput == 'Y' || cInput == 'y'){
 			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strDomainBash, strDomainBash);
 			fprintf(fp, "sed -i \"s/YourDomain/%s/g\" %s\n", strDomain, strDomainBash);
@@ -55,7 +55,7 @@ int main()
 			printf("domain.sh is on the way!\n");		
 		}
 		printf( "Bash project.sh?[Y/n]:");
-		cInput = getc();
+		cInput = getchar();
 		if(cInput == 'Y' || cInput == 'y'){
 			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strProjectBash, strProjectBash);
 			fprintf(fp, "sed -i \"s/YourProject/%s/g\" %s\n", strProject, strProjectBash);
