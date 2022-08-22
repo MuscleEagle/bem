@@ -176,7 +176,7 @@ int main()
 		if(strcmp("1", strInput) == 0 || strcmp("3", strInput) == 0)
 		{
 			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strDomainBash, strDomainBash);
-			fprintf(fp, "sed -i \"s/YourDomain/%s/g\" %s\n", sData->strDomain, strDomainBash);
+			fprintf(fp, "sed -i \"s/YourDomain/%s/g\" %s\n", sData.strDomain, strDomainBash);
 			fprintf(fp, "bash domain.sh\n");
 			fprintf(fp, "rm domain.sh\n");
 			printf("domain.sh is on the way!\n");		
@@ -184,7 +184,7 @@ int main()
 		if(strcmp("2", strInput) == 0 || strcmp("3", strInput) == 0)
 		{
 			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strProjectBash, strProjectBash);
-			fprintf(fp, "sed -i \"s/YourProject/%s/g\" %s\n", sData->strProject, strProjectBash);
+			fprintf(fp, "sed -i \"s/YourProject/%s/g\" %s\n", sData.strProject, strProjectBash);
 			fprintf(fp, "bash project.sh\n");
 			fprintf(fp, "rm project.sh\n");
 			printf("project.sh is on the way!\n");
@@ -200,34 +200,34 @@ int main()
 		fprintf(fp, "#!/bin/bash\n");
 		fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/default.conf\n");
 		fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/custom.conf\n");
-		fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json\n", sData->strProject);
+		fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json\n", sData.strProject);
 		
 		fprintf(fp, "echo \"Delete Old Nginx Default Config File!\"\n");
 		fprintf(fp, "rm -f $NginxDefaultFile\n");
 		fprintf(fp, "echo \"Download new default.conf\"\n");
 		fprintf(fp, "wget -O $NginxDefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/new.conf\n");
 		fprintf(fp, "echo \"Fill Custom Setting\"\n");
-		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxDefaultFile\n", sData->strDomain);
+		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxDefaultFile\n", sData.strDomain);
 		
 		fprintf(fp, "echo \"Delete Old Nginx Custom Config File!\"\n");
 		fprintf(fp, "rm -f $NginxCustomFile\n");
 		fprintf(fp, "echo \"Download new custom.conf\"\n");
 		fprintf(fp, "wget -O $NginxCustomFile https://raw.githubusercontent.com/MuscleEagle/bem/main/custom.conf\n");
 		fprintf(fp, "echo \"Fill Custom Setting\"\n");
-		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxCustomFile\n", sData->strDomain);
-		fprintf(fp, "sed -i \"s/YourCachePath/%s/g\" $NginxCustomFile\n", sData->strCachePath);
-		fprintf(fp, "sed -i \"s/YourPort/%s/g\" $NginxCustomFile\n", sData->strCachePort);
+		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxCustomFile\n", sData.strDomain);
+		fprintf(fp, "sed -i \"s/YourCachePath/%s/g\" $NginxCustomFile\n", sData.strCachePath);
+		fprintf(fp, "sed -i \"s/YourPort/%s/g\" $NginxCustomFile\n", sData.strCachePort);
 		
 		fprintf(fp, "echo \"Download new config.json\"\n");
 		fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
 		fprintf(fp, "echo \"Fill Custom Setting\"\n");
    
-		fprintf(fp, "sed -i \"s/YourPortKCP/%s/g\" $DefaultFile\n", sData->strKindPort);
-		fprintf(fp, "sed -i \"s/YourIdKCP/%s/g\" $DefaultFile\n", sData->strKindID);
+		fprintf(fp, "sed -i \"s/YourPortKCP/%s/g\" $DefaultFile\n", sData.strKindPort);
+		fprintf(fp, "sed -i \"s/YourIdKCP/%s/g\" $DefaultFile\n", sData.strKindID);
   
-		fprintf(fp, "sed -i \"s/YourPathWS/%s/g\" $DefaultFile\n", sData->strCachePath);
-		fprintf(fp, "sed -i \"s/YourPortWS/%s/g\" $DefaultFile\n", sData->strCachePort);
-		fprintf(fp, "sed -i \"s/YourIdWS/%s/g\" $DefaultFile\n", sData->strCacheID);
+		fprintf(fp, "sed -i \"s/YourPathWS/%s/g\" $DefaultFile\n", sData.strCachePath);
+		fprintf(fp, "sed -i \"s/YourPortWS/%s/g\" $DefaultFile\n", sData.strCachePort);
+		fprintf(fp, "sed -i \"s/YourIdWS/%s/g\" $DefaultFile\n", sData.strCacheID);
   
 		fclose(fp);
 	}
