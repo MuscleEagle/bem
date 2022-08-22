@@ -20,6 +20,7 @@ int main()
 	
 	int nKCPPort;
 	int nCachePort;
+	int nInput;
 	
 	printf( "Enter Project Name[ExampleName]:");
 	scanf("%s", strProject);
@@ -36,8 +37,9 @@ int main()
 	printf( "Enter KCP Port[PortNumber]:");
 	scanf("%d", &nKCPPort);
 	
+	printf( "Enter Work Mode:\n    1.domain\n    2.project\n    3.both\n    others.neither\n");
+	scanf("%d", &nInput);
 	{
-		char cInput = 'Y';
 		char strDomainBash[128] = "domain.sh";
 		char strProjectBash[128] = "projcet.sh";
 		//install dependencies
@@ -45,18 +47,14 @@ int main()
 		fp = fopen("dependencies.sh", "w");
 		
 		fprintf(fp, "#!/bin/bash\n");
-		printf( "Bash domain.sh?[Y/n]:\n");
-		cInput = getchar();
-		if(cInput == 'Y' || cInput == 'y'){
+		if(nInput == '1' || nInput == '3'){
 			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strDomainBash, strDomainBash);
 			fprintf(fp, "sed -i \"s/YourDomain/%s/g\" %s\n", strDomain, strDomainBash);
 			fprintf(fp, "bash domain.sh\n");
 			fprintf(fp, "rm domain.sh\n");
 			printf("domain.sh is on the way!\n");		
 		}
-		printf( "Bash project.sh?[Y/n]:\n");
-		cInput = getchar();
-		if(cInput == 'Y' || cInput == 'y'){
+		if(nInput == '2' || nInput == '3'){
 			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strProjectBash, strProjectBash);
 			fprintf(fp, "sed -i \"s/YourProject/%s/g\" %s\n", strProject, strProjectBash);
 			fprintf(fp, "bash project.sh\n");
