@@ -4,5 +4,5 @@ wget -O install.sh https://raw.githubusercontent.com/MuscleEagle/bem/main/instal
 
 # reboot
 
-wget -O Domain.sh https://raw.githubusercontent.com/MuscleEagle/bem/master/Domain.sh
+wget -O Domain.sh https://raw.githubusercontent.com/MuscleEagle/bem/main/domain.sh
 
