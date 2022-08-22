@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Install dependencies..."
 apt update
+apt install vim -y
 apt install ntpdate -y
 apt install wget -y
 apt install curl -y
