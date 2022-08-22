@@ -41,7 +41,7 @@ int main()
 	scanf("%d", &nInput);
 	{
 		char strDomainBash[128] = "domain.sh";
-		char strProjectBash[128] = "projcet.sh";
+		char strProjectBash[128] = "project.sh";
 		//install dependencies
 		FILE *fp = NULL;
 		fp = fopen("dependencies.sh", "w");
@@ -51,12 +51,14 @@ int main()
 			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strDomainBash, strDomainBash);
 			fprintf(fp, "sed -i \"s/YourDomain/%s/g\" %s\n", strDomain, strDomainBash);
 			fprintf(fp, "bash domain.sh\n");
+			fprintf(fp, "rm domain.sh\n");
 			printf("domain.sh is on the way!\n");		
 		}
 		if(nInput == 2 || nInput == 3){
 			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strProjectBash, strProjectBash);
 			fprintf(fp, "sed -i \"s/YourProject/%s/g\" %s\n", strProject, strProjectBash);
 			fprintf(fp, "bash project.sh\n");
+			fprintf(fp, "rm project.sh\n");
 			printf("project.sh is on the way!\n");
 		}
 		fclose(fp);
