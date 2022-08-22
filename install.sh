@@ -14,7 +14,7 @@ ntpdate cn.pool.ntp.org
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 echo "Create bemray project..."
 wget -O bemray.c https://raw.githubusercontent.com/MuscleEagle/bem/main/bemray.c
-gcc ray.c -luuid -o bemray
+gcc bemray.c -luuid -o bemray
 ./bemray
 bash dependencies.sh
 bash modifyconfig.sh
