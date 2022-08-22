@@ -1,5 +1,6 @@
-#include<stdio.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 #include <uuid/uuid.h>
  
 struct BemrayData
@@ -174,22 +175,6 @@ int main()
 		fp = fopen("dependencies.sh", "w");
 		
 		fprintf(fp, "#!/bin/bash\n");
-		if(strcmp("1", strInput) == 0 || strcmp("3", strInput) == 0)
-		{
-			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strDomainBash, strDomainBash);
-			fprintf(fp, "sed -i \"s/YourDomain/%s/g\" %s\n", sData.strDomain, strDomainBash);
-			fprintf(fp, "bash domain.sh\n");
-			fprintf(fp, "rm domain.sh\n");
-			printf("domain.sh is on the way!\n");		
-		}
-		if(strcmp("2", strInput) == 0 || strcmp("3", strInput) == 0)
-		{
-			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strProjectBash, strProjectBash);
-			fprintf(fp, "sed -i \"s/YourProject/%s/g\" %s\n", sData.strProject, strProjectBash);
-			fprintf(fp, "bash project.sh\n");
-			fprintf(fp, "rm project.sh\n");
-			printf("project.sh is on the way!\n");
-		}
 		fclose(fp);
 	}
 	return 1;
