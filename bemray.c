@@ -44,9 +44,8 @@ int main()
 		fprintf(fp, "#!/bin/bash\n");
 		fprintf(fp, "echo \"Install ACME!\"\n");
 		fprintf(fp, "wget -O -  https://get.acme.sh | sh -s email=admin@%s\n", strDomain);
-		fprintf(fp, "alias acme.sh=~/.acme.sh/acme.sh\n");
-		fprintf(fp, "acme.sh --issue -d %s --nginx\n", strDomain);
-		fprintf(fp, "acme.sh --upgrade --auto-upgrade\n");
+		fprintf(fp, "/root/.acme.sh/acme.sh --issue -d %s --nginx\n", strDomain);
+		fprintf(fp, "/root/.acme.sh/acme.sh --upgrade --auto-upgrade\n");
 		fprintf(fp, "echo \"ACME is ready!\"\n");
 	
 		fprintf(fp, "echo \"Install %s!\"\n", strProject);
