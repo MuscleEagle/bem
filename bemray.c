@@ -3,7 +3,6 @@
  
 int main()
 {
-	
 	char strKCPID[128];
 	char strWSID[128];
 	uuid_t uuidKCP;
@@ -63,7 +62,6 @@ int main()
 	}
 
 	{
-		
 		//modify config file
 		FILE *fp = NULL;
 		fp = fopen("modifyconfig.sh", "w");
@@ -87,7 +85,7 @@ int main()
 		fprintf(fp, "echo \"Fill Custom Setting\"\n");
 		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxCustomFile\n", strDomain);
 		fprintf(fp, "sed -i \"s/YourCachePath/%s/g\" $NginxCustomFile\n", strCachePath);
-		fprintf(fp, "sed -i \"s/YourPort/%s/g\" $NginxCustomFile\n", nCachePort);
+		fprintf(fp, "sed -i \"s/YourPort/%d/g\" $NginxCustomFile\n", nCachePort);
 		
 		fprintf(fp, "echo \"Download new config.json\"\n");
 		fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
