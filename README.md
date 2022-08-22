@@ -1,8 +1,8 @@
 # bem
 
-wget https://raw.githubusercontent.com/MuscleEagle/bem/master/Install.sh
+wget -O install-dat-release.sh https://raw.githubusercontent.com/MuscleEagle/bem/main/install.sh
 
-reboot
+# reboot
 
-wget https://raw.githubusercontent.com/MuscleEagle/bem/master/Domain.sh
+wget -O Domain.sh https://raw.githubusercontent.com/MuscleEagle/bem/master/Domain.sh
 
