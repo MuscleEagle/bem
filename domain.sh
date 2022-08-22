@@ -29,5 +29,5 @@ echo "    location = /50x.html {" >> $NginxDefaultFile
 echo "        root   /usr/share/nginx/html;" >> $NginxDefaultFile
 echo "    }" >> $NginxDefaultFile
 echo "}" >> $NginxDefaultFile
-certbot certonly --quiet --non-interactive --webroot -w /usr/share/nginx/html/ --email admin@$DomainName -d $DomainName
+certbot certonly --quiet --non-interactive --agree-tos --webroot -w /usr/share/nginx/html/ --email admin@$DomainName -d $DomainName
 certbot renew  --quiet  --no-self-upgrade
