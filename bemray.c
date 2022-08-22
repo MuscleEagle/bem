@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <uuid/uuid.h>
+ 
+int main()
+{
+	
+	char strKCPID[128];
+	char strWSID[128];
+	uuid_t uuidKCP;
+	uuid_t uuidWS;
+	
+	uuid_generate(uuidKCP);
+	uuid_unparse(uuidKCP, strKCPID);
+	
+	uuid_generate(uuidWS);
+	uuid_unparse(uuidWS, strWSID);
+	
+	char strProject[128];
+	char strDomain[128];
+	char strCachePath[128];
+	
+	int nKCPPort;
+	int nCachePort;
+	
+	printf( "Enter Project Name[ExampleName]:");
+	scanf("%s", strProject);
+	
+	printf( "Enter Domain Name[ExampleDomain.com]:");
+	scanf("%s", strDomain);
+	
+	printf( "Enter Cache Path[ExamplePath]:");
+	scanf("%s", strCachePath);
+	
+	printf( "Enter Cache Port[PortNumber]:");
+	scanf("%d", &nCachePort);
+
+	printf( "Enter KCP Port[PortNumber]:");
+	scanf("%d", &nKCPPort);
+	
+	{
+		//install dependencies
+		FILE *fp = NULL;
+		fp = fopen("dependencies.sh", "w");
+	
+		fprintf(fp, "#!/bin/bash\n");
+		fprintf(fp, "echo \"Install ACME!\"\n");
+		fprintf(fp, "wget -O -  https://get.acme.sh | sh -s email=admin@%s\n", strDomain);
+		fprintf(fp, "alias acme.sh=~/.acme.sh/acme.sh\n");
+		fprintf(fp, "acme.sh --issue -d %s --nginx\n", strDomain);
+		fprintf(fp, "acme.sh --upgrade --auto-upgrade\n");
+		fprintf(fp, "echo \"ACME is ready!\"\n");
+	
+		fprintf(fp, "echo \"Install %s!\"\n", strProject);
+		fprintf(fp, "wget -O install-release.sh https://raw.githubusercontent.com/%s/fhs-install-%s/master/install-release.sh\n", strProject, strProject);
+		fprintf(fp, "wget -O install-dat-release.sh https://raw.githubusercontent.com/%s/fhs-install-%s/master/install-dat-release.sh\n", strProject, strProject);
+		fprintf(fp, "bash install-release.sh\n");
+		fprintf(fp, "rm install-release.sh\n");
+		fprintf(fp, "bash install-dat-release.sh\n");
+		fprintf(fp, "rm install-dat-release.sh\n");
+		fprintf(fp, "echo \"%s is ready!\"\n", strProject);
+	
+		fclose(fp);
+	}
+
+	{
+		
+		//modify config file
+		FILE *fp = NULL;
+		fp = fopen("rayuuid.sh", "w");
+ 
+		fprintf(fp, "#!/bin/bash\n");
+		fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/default.conf\n");
+		fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/custom.conf\n");
+		fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json\n", strProject);
+		
+		fprintf(fp, "echo \"Delete Old Nginx Default Config File!\"\n");
+		fprintf(fp, "rm -f $NginxDefaultFile\n");
+		fprintf(fp, "echo \"Download new default.conf\"\n");
+		fprintf(fp, "wget -O $NginxDefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/new.conf\n");
+		fprintf(fp, "echo \"Fill Custom Setting\"\n");
+		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxDefaultFile\n", strDomain);
+		
+		fprintf(fp, "echo \"Delete Old Nginx Custom Config File!\"\n");
+		fprintf(fp, "rm -f $NginxCustomFile\n");
+		fprintf(fp, "echo \"Download new custom.conf\"\n");
+		fprintf(fp, "wget -O $NginxCustomFile https://raw.githubusercontent.com/MuscleEagle/bem/main/custom.conf\n");
+		fprintf(fp, "echo \"Fill Custom Setting\"\n");
+		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxCustomFile\n", strDomain);
+		fprintf(fp, "sed -i \"s/YourCachePath/%s/g\" $NginxCustomFile\n", strCachePath);
+		fprintf(fp, "sed -i \"s/YourPort/%s/g\" $NginxCustomFile\n", nCachePort);
+		
+		fprintf(fp, "echo \"Download new config.json\"\n");
+		fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
+		fprintf(fp, "echo \"Fill Custom Setting\"\n");
+   
+		fprintf(fp, "sed -i \"s/YourPortKCP/%d/g\" $DefaultFile\n", iKCP);
+		fprintf(fp, "sed -i \"s/YourIdKCP/%s/g\" $DefaultFile\n", strKCPID);
+  
+		fprintf(fp, "sed -i \"s/YourPathWS/%s/g\" $DefaultFile\n", strCachePath);
+		fprintf(fp, "sed -i \"s/YourPortWS/%d/g\" $DefaultFile\n", iWS);
+		fprintf(fp, "sed -i \"s/YourIdWS/%s/g\" $DefaultFile\n", strWSID);
+  
+		fclose(fp);
+	}
+	
+	return 1;
+}
