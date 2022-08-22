@@ -14,7 +14,7 @@ struct BemrayData
 	char strCachePath[128];
 	char strCachePort[128];
 	char strKindPort[128];
-}
+};
  
 bool findConfig(char* pLine, char* pLeft, char* pRight)
 {
