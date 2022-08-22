@@ -45,7 +45,7 @@ int main()
 		fp = fopen("dependencies.sh", "w");
 		
 		fprintf(fp, "#!/bin/bash\n");
-		printf( "Bash domain.sh?[Y/n]:");
+		printf( "Bash domain.sh?[Y/n]:\n");
 		cInput = getchar();
 		if(cInput == 'Y' || cInput == 'y'){
 			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strDomainBash, strDomainBash);
@@ -54,7 +54,7 @@ int main()
 			fprintf(fp, "rm domain.sh\n");
 			printf("domain.sh is on the way!\n");		
 		}
-		printf( "Bash project.sh?[Y/n]:");
+		printf( "Bash project.sh?[Y/n]:\n");
 		cInput = getchar();
 		if(cInput == 'Y' || cInput == 'y'){
 			fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strProjectBash, strProjectBash);
