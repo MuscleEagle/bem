@@ -1,4 +1,5 @@
-#include <stdio.h>
+#include<stdio.h>
+#include<curses.h>
 #include <uuid/uuid.h>
  
 int main()
