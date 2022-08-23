@@ -1,7 +1,13 @@
+//#define BemrayHand
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#ifdef BemrayHand
+#pragma warning(disable:4996)
+#else
 #include <uuid/uuid.h>
+#endif
 
 struct BemrayData
 {
@@ -95,12 +101,17 @@ bool praseConfig(struct BemrayData* pData, char* pLeft, char* pRight)
 
 void makeGuid(struct BemrayData* pData)
 {
+#ifdef BemrayHand
+	strcpy(pData->strCacheID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
+	strcpy(pData->strKindID, "a3e3a80d-df41-4235-bd18-d45878da324e");
+#else
 	uuid_t uuidCache;
 	uuid_t uuidKind;
 	uuid_generate(uuidCache);
 	uuid_unparse(uuidCache, pData->strCacheID);
 	uuid_generate(uuidKind);
 	uuid_unparse(uuidKind, pData->strKindID);
+#endif
 }
 
 void initData(struct BemrayData* pData)
@@ -221,6 +232,65 @@ bool MakeDepend(struct BemrayData* pData)
 	return true;
 }
 
+bool MakeModify(struct BemrayData* pData)
+{
+	//modify config file
+	FILE* fp = NULL;
+	fp = fopen(pData->strModifyFile, "w");
+	if (!fp) return false;
+
+	fprintf(fp, "#!/bin/bash\n");
+	fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/default.conf\n");
+	fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/custom.conf\n");
+	fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json\n", pData->strProject);
+
+	fprintf(fp, "echo \"Delete Old Nginx Default Config File!\"\n");
+	fprintf(fp, "rm -f $NginxDefaultFile\n");
+	fprintf(fp, "echo \"Download new default.conf\"\n");
+	fprintf(fp, "wget -O $NginxDefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/new.conf\n");
+	fprintf(fp, "echo \"Fill Custom Setting\"\n");
+	fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxDefaultFile\n", pData->strDomain);
+
+	fprintf(fp, "echo \"Delete Old Nginx Custom Config File!\"\n");
+	fprintf(fp, "rm -f $NginxCustomFile\n");
+	fprintf(fp, "echo \"Download new custom.conf\"\n");
+	fprintf(fp, "wget -O $NginxCustomFile https://raw.githubusercontent.com/MuscleEagle/bem/main/custom.conf\n");
+	fprintf(fp, "echo \"Fill Custom Setting\"\n");
+	fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxCustomFile\n", pData->strDomain);
+	fprintf(fp, "sed -i \"s/YourCachePath/%s/g\" $NginxCustomFile\n", pData->strCachePath);
+	fprintf(fp, "sed -i \"s/YourPort/%s/g\" $NginxCustomFile\n", pData->strCachePort);
+
+	fprintf(fp, "echo \"Download new config.json\"\n");
+	fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
+	fprintf(fp, "echo \"Fill Custom Setting\"\n");
+
+	fprintf(fp, "sed -i \"s/YourPortKCP/%s/g\" $DefaultFile\n", pData->strKindPort);
+	fprintf(fp, "sed -i \"s/YourIdKCP/%s/g\" $DefaultFile\n", pData->strKindID);
+
+	fprintf(fp, "sed -i \"s/YourPathWS/%s/g\" $DefaultFile\n", pData->strCachePath);
+	fprintf(fp, "sed -i \"s/YourPortWS/%s/g\" $DefaultFile\n", pData->strCachePort);
+	fprintf(fp, "sed -i \"s/YourIdWS/%s/g\" $DefaultFile\n", pData->strCacheID);
+
+	fclose(fp);
+	return true;
+}
+
+void MakeBemrayShell(struct BemrayData* pData, bool bDepend, bool bModify)
+{
+	FILE* fp = NULL;
+	fp = fopen("bemray.sh", "w");
+	if (!fp) return;
+
+	fprintf(fp, "#!/bin/bash\n");
+
+	fprintf(fp, "bash %s\n", pData->strDependFile);
+	fprintf(fp, "rm %s\n", pData->strDependFile);
+	fprintf(fp, "bash %s\n", pData->strModifyFile);
+	fprintf(fp, "rm %s\n", pData->strModifyFile);
+
+	fclose(fp);
+}
+
 int main()
 {
 	struct BemrayData sData;
@@ -235,46 +305,6 @@ int main()
 	if (GetInputNumber() == 1)
 		SaveData(&sData, true);
 
-	MakeDepend(&sData);
-
-	{
-		//modify config file
-		FILE* fp = NULL;
-		fp = fopen(sData.strModifyFile, "w");
-
-		fprintf(fp, "#!/bin/bash\n");
-		fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/default.conf\n");
-		fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/custom.conf\n");
-		fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json\n", sData.strProject);
-
-		fprintf(fp, "echo \"Delete Old Nginx Default Config File!\"\n");
-		fprintf(fp, "rm -f $NginxDefaultFile\n");
-		fprintf(fp, "echo \"Download new default.conf\"\n");
-		fprintf(fp, "wget -O $NginxDefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/new.conf\n");
-		fprintf(fp, "echo \"Fill Custom Setting\"\n");
-		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxDefaultFile\n", sData.strDomain);
-
-		fprintf(fp, "echo \"Delete Old Nginx Custom Config File!\"\n");
-		fprintf(fp, "rm -f $NginxCustomFile\n");
-		fprintf(fp, "echo \"Download new custom.conf\"\n");
-		fprintf(fp, "wget -O $NginxCustomFile https://raw.githubusercontent.com/MuscleEagle/bem/main/custom.conf\n");
-		fprintf(fp, "echo \"Fill Custom Setting\"\n");
-		fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxCustomFile\n", sData.strDomain);
-		fprintf(fp, "sed -i \"s/YourCachePath/%s/g\" $NginxCustomFile\n", sData.strCachePath);
-		fprintf(fp, "sed -i \"s/YourPort/%s/g\" $NginxCustomFile\n", sData.strCachePort);
-
-		fprintf(fp, "echo \"Download new config.json\"\n");
-		fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
-		fprintf(fp, "echo \"Fill Custom Setting\"\n");
-
-		fprintf(fp, "sed -i \"s/YourPortKCP/%s/g\" $DefaultFile\n", sData.strKindPort);
-		fprintf(fp, "sed -i \"s/YourIdKCP/%s/g\" $DefaultFile\n", sData.strKindID);
-
-		fprintf(fp, "sed -i \"s/YourPathWS/%s/g\" $DefaultFile\n", sData.strCachePath);
-		fprintf(fp, "sed -i \"s/YourPortWS/%s/g\" $DefaultFile\n", sData.strCachePort);
-		fprintf(fp, "sed -i \"s/YourIdWS/%s/g\" $DefaultFile\n", sData.strCacheID);
-
-		fclose(fp);
-	}
+	MakeBemrayShell(&sData, MakeDepend(&sData), MakeModify(&sData));
 	return 1;
 }
