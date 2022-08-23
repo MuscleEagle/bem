@@ -12,6 +12,7 @@ case $inputA in
 		apt install uuid-dev
 		apt install nginx -y
 		apt install certbot -y
+		apt install socat -y
 		;;
 
     [nN][oO]|[nN])
