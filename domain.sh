@@ -32,6 +32,6 @@ echo "}" >> $NginxDefaultFile
 
 echo "Install ACME!"
 wget -O -  https://get.acme.sh | sh -s email=admin@YourDomain
-/root/.acme.sh/acme.sh --issue -d YourDomain --nginx
+/root/.acme.sh/acme.sh --issue  -d YourDomain   --nginx
 /root/.acme.sh/acme.sh --upgrade --auto-upgrade
 echo "ACME is ready!"
