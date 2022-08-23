@@ -1,0 +1,11 @@
+#vim /etc/systemd/system/v2ray.service
+#[Service]
+#Environment="V2RAY_VMESS_AEAD_FORCED=false"
+#...
+
+Restart
+systemctl enable nginx.service
+systemctl enable v2ray
+systemctl daemon-reload
+systemctl restart nginx
+systemctl restart v2ray
