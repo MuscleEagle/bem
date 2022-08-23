@@ -15,6 +15,14 @@ case $input in
 		;;
 esac
 
+echo "Remove default.conf!"
+rm /etc/nginx/conf.d/default.conf
+
+echo "Remove custom.conf!"
+rm /etc/nginx/conf.d/custom.conf
+
+echo "Create default.conf!"
+
 NginxDefaultFile="/etc/nginx/conf.d/default.conf"
 
 echo "server {" > $NginxDefaultFile
@@ -30,6 +38,7 @@ echo "        root   /usr/share/nginx/html;" >> $NginxDefaultFile
 echo "    }" >> $NginxDefaultFile
 echo "}" >> $NginxDefaultFile
 
+echo "Restart nginx!"
 systemctl restart nginx
 
 echo "Install ACME!"
