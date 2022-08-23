@@ -111,7 +111,7 @@ bool LoadData(struct BemrayData* pData)
 		fgets(strLine,1024,fp);
 		if( findConfig(strLine, strLeft, strRight) )
 		{
-			praseConfig(pData, strLeft, strRight)
+			praseConfig(pData, strLeft, strRight);
 		}
 	}
 	fclose(fp);
