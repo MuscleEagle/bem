@@ -1,4 +1,4 @@
-#define BemrayHand
+//#define BemrayHand
 
 #include <stdio.h>
 #include <stdbool.h>
