@@ -215,8 +215,8 @@ bool MakeDepend(struct BemrayData* pData)
 	{
 		fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strDomainBash, strDomainBash);
 		fprintf(fp, "sed -i \"s/YourDomain/%s/g\" %s\n", pData->strDomain, strDomainBash);
-		//fprintf(fp, "bash domain.sh\n");
-		//fprintf(fp, "rm domain.sh\n");
+		fprintf(fp, "bash domain.sh\n");
+		fprintf(fp, "rm domain.sh\n");
 		printf("domain.sh is on the way!\n");
 	}
 	if (nInput == 2 || nInput == 3)
@@ -224,8 +224,8 @@ bool MakeDepend(struct BemrayData* pData)
 		fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strProjectBash, strProjectBash);
 		fprintf(fp, "sed -i \"s/YourProject/%s/g\" %s\n", pData->strProject, strProjectBash);
 		fprintf(fp, "sed -i \"s/YourSwitch/%s/g\" %s\n", strSwitchOn, strProjectBash);
-		//fprintf(fp, "bash project.sh\n");
-		//fprintf(fp, "rm project.sh\n");
+		fprintf(fp, "bash project.sh\n");
+		fprintf(fp, "rm project.sh\n");
 		printf("project.sh is on the way!\n");
 	}
 	fclose(fp);
