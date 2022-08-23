@@ -46,14 +46,16 @@ echo "Create bemray project..."
 wget -O bemray.c https://raw.githubusercontent.com/MuscleEagle/bem/main/bemray.c
 gcc bemray.c -luuid -o bemray
 echo "Run bemray..."
+rm bemray.c
 ./bemray
+rm bemray
 
 read -r -p "Run bash?  [Y/n] " inputC
 case $inputC in
     [yY][eE][sS]|[yY])
 		echo "Yes"
-		bash dependencies.sh
-		bash modifyconfig.sh
+		bash bemray.sh
+		rm bemray.sh
 		;;
 
     [nN][oO]|[nN])
