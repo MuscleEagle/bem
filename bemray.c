@@ -29,7 +29,7 @@ bool findConfig(char* pLine, char* pLeft, char* pRight)
 	strncpy(pRight, pItr + 1, nLast);
 }
  
-bool praseConfig(BemrayData* pData, char* pLeft, char* pRight)
+bool praseConfig(struct BemrayData* pData, char* pLeft, char* pRight)
 {
 	if(strcmp("UseFile", pLeft) == 0)
 	{
@@ -78,7 +78,7 @@ bool praseConfig(BemrayData* pData, char* pLeft, char* pRight)
 	}
 }
  
-void initData(BemrayData* pData)
+void initData(struct BemrayData* pData)
 {
 	strcpy(pData->strUseFile, "false");
 	strcpy(pData->strSwitch, "fly");
@@ -96,7 +96,7 @@ void initData(BemrayData* pData)
 	uuid_unparse(uuidKind, pData->strKindID);
 }
 
-bool LoadData(BemrayData* pData)
+bool LoadData(struct BemrayData* pData)
 {
 	initData(pData);
 	FILE *fp = fopen("bemray.conf", "r");
@@ -120,7 +120,7 @@ bool LoadData(BemrayData* pData)
 	return false;
 }
 
-void SaveData(BemrayData* pData, bool bNewUUID)
+void SaveData(struct BemrayData* pData, bool bNewUUID)
 {
 	FILE *fp = fopen("bemray.conf", "w");
 	if(!fp) return;
@@ -148,7 +148,7 @@ void SaveData(BemrayData* pData, bool bNewUUID)
 
 int main()
 {
-	BemrayData sData;
+	struct BemrayData sData;
 	if(!LoadData(&sData))
 	{
 		printf( "Please Check bemray.conf!\n");
