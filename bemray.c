@@ -1,4 +1,4 @@
-//#define BemrayHand
+#define BemrayHand
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -241,7 +241,7 @@ bool MakeModify(struct BemrayData* pData)
 
 	fprintf(fp, "#!/bin/bash\n");
 	fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/default.conf\n");
-	fprintf(fp, "NginxDefaultFile=/etc/nginx/conf.d/custom.conf\n");
+	fprintf(fp, "NginxCustomFile=/etc/nginx/conf.d/custom.conf\n");
 	fprintf(fp, "DefaultFile=/usr/local/etc/%s/config.json\n", pData->strProject);
 
 	fprintf(fp, "echo \"Delete Old Nginx Default Config File!\"\n");
