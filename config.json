@@ -46,8 +46,8 @@
             }
         }
     ],
-    "outbounds": [{
-         "protocol": "freedom",
-         "settings": {}
-    }]
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "rules": []
+    }
 }
