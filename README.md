@@ -3,6 +3,8 @@
 wget -O install.sh https://raw.githubusercontent.com/MuscleEagle/bem/main/install.sh
 
 # reboot
+bash install.sh
 
-wget -O domain.sh https://raw.githubusercontent.com/MuscleEagle/bem/main/domain.sh
+vim bemray.conf
 
+bash install.sh
