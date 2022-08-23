@@ -119,7 +119,6 @@ bool LoadData(struct BemrayData* pData)
 		return true;
 	return false;
 }
-
 void SaveData(struct BemrayData* pData, bool bNewUUID)
 {
 	FILE *fp = fopen("bemray.conf", "w");
@@ -133,15 +132,15 @@ void SaveData(struct BemrayData* pData, bool bNewUUID)
 		uuid_generate(uuidKind);
 		uuid_unparse(uuidKind, pData->strKindID);
 	}
-	fwrite(fp, "UseFile=%s\n", pData->strUseFile);
-	fwrite(fp, "Switch=%s\n", pData->strSwitch);
-	fwrite(fp, "Project=%s\n", pData->strProject);
-	fwrite(fp, "Domain=%s\n", pData->strDomain);
-	fwrite(fp, "CachePath=%s\n", pData->strCachePath);
-	fwrite(fp, "CachePort=%s\n", pData->strCachePort);
-	fwrite(fp, "KindPort=%s\n", pData->strKindPort);
-	fwrite(fp, "CacheID=%s\n", pData->strCacheID);
-	fwrite(fp, "KindID=%s\n", pData->strKindID);
+	fprintf(fp, "UseFile=%s\n", pData->strUseFile);
+	fprintf(fp, "Switch=%s\n", pData->strSwitch);
+	fprintf(fp, "Project=%s\n", pData->strProject);
+	fprintf(fp, "Domain=%s\n", pData->strDomain);
+	fprintf(fp, "CachePath=%s\n", pData->strCachePath);
+	fprintf(fp, "CachePort=%s\n", pData->strCachePort);
+	fprintf(fp, "KindPort=%s\n", pData->strKindPort);
+	fprintf(fp, "CacheID=%s\n", pData->strCacheID);
+	fprintf(fp, "KindID=%s\n", pData->strKindID);
 	
 	fclose(fp);
 }
