@@ -1,53 +1,77 @@
 {
     "log": {
-        "access": "/var/log/v2ray/access.log",
+		"access": "/var/log/v2ray/access.log",
         "error": "/var/log/v2ray/error.log",
         "loglevel": "warning"
     },
-    "inbounds": [{
-            "port": YourPortWS,
-            "listen": "127.0.0.1",
-            "protocol": "vmess",
+    "inbounds": [
+        {
+            "port": 443,
+            "protocol": "vless",
             "settings": {
-                "clients": [{
-                        "id": "YourIdWS",
-                        "level": 1,
-                        "alterId": 0
+                "clients": [
+                    {
+                        "id": "YourIdWS", // 填写你的 UUID
+                        "level": 0,
+                        "email": "love@example.com"
+                    }
+                ],
+                "decryption": "none",
+                "fallbacks": [
+                    {
+                        "dest": 80
+                    },
+                    {
+                        "path": "/YourPathWS", // 必须换成自定义的 PATH
+                        "dest": YourPortWS,
+                        "xver": 1
                     }
                 ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "tls",
+                "tlsSettings": {
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "YourCrt", // 换成你的证书，绝对路径
+                            "keyFile": "YourKey" // 换成你的私钥，绝对路径
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "port": YourPortWS,
+            "listen": "127.0.0.1",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "YourIdWS", // 填写你的 UUID
+                        "level": 0,
+                        "email": "love@example.com"
+                    }
+                ],
+                "decryption": "none"
             },
             "streamSettings": {
                 "network": "ws",
+                "security": "none",
                 "wsSettings": {
-                    "path": "/YourPathWS"
-                }
-            }
-        }, {
-            "port": YourPortKCP,
-            "protocol": "vmess",
-            "settings": {
-                "clients": [{
-                        "id": "YourIdKCP",
-                        "level": 1,
-                        "alterId": 0
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "mkcp",
-                "kcpSettings": {
-                    "uplinkCapacity": 5,
-                    "downlinkCapacity": 100,
-                    "congestion": true,
-                    "header": {
-                        "type": "wechat-video"
-                    }
+                    "acceptProxyProtocol": true, // 提醒：若你用 Nginx/Caddy 等反代 WS，需要删掉这行
+                    "path": "/YourPathWS" // 必须换成自定义的 PATH，需要和上面的一致
                 }
             }
         }
     ],
-    "outbounds": [{
-         "protocol": "freedom",
-         "settings": {}
-    }]
+    "outbounds": [
+        {
+            "protocol": "freedom"
+        }
+    ]
 }
+
