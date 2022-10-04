@@ -17,12 +17,10 @@ struct BemrayData
 	char strUseFile[128];
 	char strSwitch[128];
 	char strCacheID[128];
-	char strKindID[128];
 	char strProject[128];
 	char strDomain[128];
 	char strCachePath[128];
 	char strCachePort[128];
-	char strKindPort[128];
 };
 
 bool findConfig(char* pLine, char* pLeft, char* pRight)
@@ -66,11 +64,6 @@ bool praseConfig(struct BemrayData* pData, char* pLeft, char* pRight)
 		strcpy(pData->strCacheID, pRight);
 		return true;
 	}
-	if (strcmp("KindID", pLeft) == 0)
-	{
-		strcpy(pData->strKindID, pRight);
-		return true;
-	}
 	if (strcmp("Project", pLeft) == 0)
 	{
 		strcpy(pData->strProject, pRight);
@@ -91,11 +84,6 @@ bool praseConfig(struct BemrayData* pData, char* pLeft, char* pRight)
 		strcpy(pData->strCachePort, pRight);
 		return true;
 	}
-	if (strcmp("KindPort", pLeft) == 0)
-	{
-		strcpy(pData->strKindPort, pRight);
-		return true;
-	}
 	return false;
 }
 
@@ -103,14 +91,10 @@ void makeGuid(struct BemrayData* pData)
 {
 #ifdef BemrayHand
 	strcpy(pData->strCacheID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
-	strcpy(pData->strKindID, "a3e3a80d-df41-4235-bd18-d45878da324e");
 #else
 	uuid_t uuidCache;
-	uuid_t uuidKind;
 	uuid_generate(uuidCache);
 	uuid_unparse(uuidCache, pData->strCacheID);
-	uuid_generate(uuidKind);
-	uuid_unparse(uuidKind, pData->strKindID);
 #endif
 }
 
@@ -123,7 +107,6 @@ void initData(struct BemrayData* pData)
 	strcpy(pData->strSwitch, "fly");
 	strcpy(pData->strCachePath, "bemray");
 	strcpy(pData->strCachePort, "12345");
-	strcpy(pData->strKindPort, "12345");
 	strcpy(pData->strProject, "bemray");
 	strcpy(pData->strDomain, "bemray.com");
 
@@ -177,9 +160,7 @@ void SaveData(struct BemrayData* pData, bool bNewUUID)
 	fprintf(fp, "Domain=%s\n", pData->strDomain);
 	fprintf(fp, "CachePath=%s\n", pData->strCachePath);
 	fprintf(fp, "CachePort=%s\n", pData->strCachePort);
-	fprintf(fp, "KindPort=%s\n", pData->strKindPort);
 	fprintf(fp, "CacheID=%s\n", pData->strCacheID);
-	fprintf(fp, "KindID=%s\n", pData->strKindID);
 
 	fclose(fp);
 }
@@ -263,9 +244,6 @@ bool MakeModify(struct BemrayData* pData)
 	fprintf(fp, "echo \"Download new config.json\"\n");
 	fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
 	fprintf(fp, "echo \"Fill Custom Setting\"\n");
-
-	fprintf(fp, "sed -i \"s/YourPortKCP/%s/g\" $DefaultFile\n", pData->strKindPort);
-	fprintf(fp, "sed -i \"s/YourIdKCP/%s/g\" $DefaultFile\n", pData->strKindID);
 
 	fprintf(fp, "sed -i \"s/YourPathWS/%s/g\" $DefaultFile\n", pData->strCachePath);
 	fprintf(fp, "sed -i \"s/YourPortWS/%s/g\" $DefaultFile\n", pData->strCachePort);
