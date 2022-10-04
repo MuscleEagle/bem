@@ -13,7 +13,7 @@
                     {
                         "id": "YourIdWS", // 填写你的 UUID
                         "level": 0,
-                        "email": "love@example.com"
+                        "email": "admin@YourDomainName"
                     }
                 ],
                 "decryption": "none",
@@ -37,8 +37,8 @@
                     ],
                     "certificates": [
                         {
-                            "certificateFile": "YourCrt", // 换成你的证书，绝对路径
-                            "keyFile": "YourKey" // 换成你的私钥，绝对路径
+                            "certificateFile": "/root/.acme.sh/YourDomainName/fullchain.cer", // 换成你的证书，绝对路径
+                            "keyFile": "/root/.acme.sh/YourDomainName/YourDomainName.key" // 换成你的私钥，绝对路径
                         }
                     ]
                 }
@@ -53,7 +53,7 @@
                     {
                         "id": "YourIdWS", // 填写你的 UUID
                         "level": 0,
-                        "email": "love@example.com"
+                        "email": "admin@YourDomainName"
                     }
                 ],
                 "decryption": "none"
