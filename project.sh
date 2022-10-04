@@ -1,8 +1,4 @@
 echo "Install YourProject!"
-wget -O install-release.sh https://raw.githubusercontent.com/YourSwitch/fhs-install-YourProject/master/install-release.sh
-wget -O install-dat-release.sh https://raw.githubusercontent.com/YourSwitch/fhs-install-YourProject/master/install-dat-release.sh
-bash install-release.sh
-rm install-release.sh
-bash install-dat-release.sh
-rm install-dat-release.sh
+bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install-geodata
 echo "YourProject is ready!"
