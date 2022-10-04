@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+
 #ifdef BemrayHand
 #pragma warning(disable:4996)
 #else
@@ -11,16 +12,43 @@
 
 struct BemrayData
 {
+	//Config File Name
 	char strConfigFile[128];
+	//Bash Domain Shell
 	char strDependFile[128];
+	//Modify Nginx Shell
 	char strModifyFile[128];
+	//Is Config File Ready?
 	char strUseFile[128];
-	char strSwitch[128];
-	char strCacheID[128];
+	//Author
+	char strAuthor[128];
+	//Project Name
 	char strProject[128];
+	//Domain Name
 	char strDomain[128];
-	char strCachePath[128];
-	char strCachePort[128];
+
+	//LessXtcpID
+	char strLessXtcpID[128];
+
+	//Trojan
+	char strTrojanPort[128];
+	char strTrojanPass[128];
+
+	//LessWs
+	char strLessWsID[128];
+	char strLessWsPath[128];
+	char strLessWsPort[128];
+
+	//MessTcp
+	char strMessTcpID[128];
+	char strMessTcpPath[128];
+	char strMessTcpPort[128];
+
+	//MessWs
+	char strMessWsID[128];
+	char strMessWsPath[128];
+	char strMessWsPort[128];
+
 };
 
 bool findConfig(char* pLine, char* pLeft, char* pRight)
@@ -34,6 +62,7 @@ bool findConfig(char* pLine, char* pLeft, char* pRight)
 
 bool praseConfig(struct BemrayData* pData, char* pLeft, char* pRight)
 {
+	//Head
 	if (strcmp("ConfigFile", pLeft) == 0)
 	{
 		strcpy(pData->strConfigFile, pRight);
@@ -54,14 +83,9 @@ bool praseConfig(struct BemrayData* pData, char* pLeft, char* pRight)
 		strcpy(pData->strUseFile, pRight);
 		return true;
 	}
-	if (strcmp("Switch", pLeft) == 0)
+	if (strcmp("Author", pLeft) == 0)
 	{
-		strcpy(pData->strSwitch, pRight);
-		return true;
-	}
-	if (strcmp("CacheID", pLeft) == 0)
-	{
-		strcpy(pData->strCacheID, pRight);
+		strcpy(pData->strAuthor, pRight);
 		return true;
 	}
 	if (strcmp("Project", pLeft) == 0)
@@ -74,14 +98,66 @@ bool praseConfig(struct BemrayData* pData, char* pLeft, char* pRight)
 		strcpy(pData->strDomain, pRight);
 		return true;
 	}
-	if (strcmp("CachePath", pLeft) == 0)
+	//Data
+	if (strcmp("LessXtcpID", pLeft) == 0)
 	{
-		strcpy(pData->strCachePath, pRight);
+		strcpy(pData->strLessXtcpID, pRight);
 		return true;
 	}
-	if (strcmp("CachePort", pLeft) == 0)
+	if (strcmp("TrojanPort", pLeft) == 0)
 	{
-		strcpy(pData->strCachePort, pRight);
+		strcpy(pData->strTrojanPort, pRight);
+		return true;
+	}
+	if (strcmp("TrojanPass", pLeft) == 0)
+	{
+		strcpy(pData->strTrojanPass, pRight);
+		return true;
+	}
+	if (strcmp("LessWsID", pLeft) == 0)
+	{
+		strcpy(pData->strLessWsID, pRight);
+		return true;
+	}
+	if (strcmp("LessWsPath", pLeft) == 0)
+	{
+		strcpy(pData->strLessWsPath, pRight);
+		return true;
+	}
+	if (strcmp("LessWsPort", pLeft) == 0)
+	{
+		strcpy(pData->strLessWsPort, pRight);
+		return true;
+	}
+	if (strcmp("MessTcpID", pLeft) == 0)
+	{
+		strcpy(pData->strMessTcpID, pRight);
+		return true;
+	}
+	if (strcmp("MessTcpPath", pLeft) == 0)
+	{
+		strcpy(pData->strMessTcpPath, pRight);
+		return true;
+	}
+	if (strcmp("MessTcpPort", pLeft) == 0)
+	{
+		strcpy(pData->strMessTcpPort, pRight);
+		return true;
+	}
+
+	if (strcmp("MessWsID", pLeft) == 0)
+	{
+		strcpy(pData->strMessWsID, pRight);
+		return true;
+	}
+	if (strcmp("MessWsPath", pLeft) == 0)
+	{
+		strcpy(pData->strMessWsPath, pRight);
+		return true;
+	}
+	if (strcmp("MessWsPort", pLeft) == 0)
+	{
+		strcpy(pData->strMessWsPort, pRight);
 		return true;
 	}
 	return false;
@@ -90,11 +166,20 @@ bool praseConfig(struct BemrayData* pData, char* pLeft, char* pRight)
 void makeGuid(struct BemrayData* pData)
 {
 #ifdef BemrayHand
-	strcpy(pData->strCacheID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
+	strcpy(pData->strLessXtcpID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
+	strcpy(pData->strLessWsID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
+	strcpy(pData->strMessTcpID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
+	strcpy(pData->strMessWsID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
 #else
 	uuid_t uuidCache;
 	uuid_generate(uuidCache);
-	uuid_unparse(uuidCache, pData->strCacheID);
+	uuid_unparse(uuidCache, pData->strLessXtcpID);
+	uuid_generate(uuidCache);
+	uuid_unparse(uuidCache, pData->strLessWsID);
+	uuid_generate(uuidCache);
+	uuid_unparse(uuidCache, pData->strMessTcpID);
+	uuid_generate(uuidCache);
+	uuid_unparse(uuidCache, pData->strMessWsID);
 #endif
 }
 
@@ -104,11 +189,22 @@ void initData(struct BemrayData* pData)
 	strcpy(pData->strDependFile, "depend.sh");
 	strcpy(pData->strModifyFile, "modify.sh");
 	strcpy(pData->strUseFile, "false");
-	strcpy(pData->strSwitch, "fly");
-	strcpy(pData->strCachePath, "bemray");
-	strcpy(pData->strCachePort, "12345");
+	strcpy(pData->strAuthor, "fly");
 	strcpy(pData->strProject, "bemray");
 	strcpy(pData->strDomain, "bemray.com");
+
+	strcpy(pData->strLessXtcpID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
+	strcpy(pData->strTrojanPort, "1310");
+	strcpy(pData->strTrojanPass, "12345");
+	strcpy(pData->strLessWsID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
+	strcpy(pData->strLessWsPath, "websocket");
+	strcpy(pData->strLessWsPort, "1234");
+	strcpy(pData->strMessTcpID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
+	strcpy(pData->strMessTcpPath, "vmesstcp");
+	strcpy(pData->strMessTcpPort, "2345");
+	strcpy(pData->strMessWsID, "fb2b85b3-cdde-4a7c-8202-33f465799c67");
+	strcpy(pData->strMessWsPath, "vmessws");
+	strcpy(pData->strMessWsPort, "3456");
 
 	makeGuid(pData);
 }
@@ -155,12 +251,22 @@ void SaveData(struct BemrayData* pData, bool bNewUUID)
 	fprintf(fp, "DependFile=%s\n", pData->strDependFile);
 	fprintf(fp, "ModifyFile=%s\n", pData->strModifyFile);
 	fprintf(fp, "UseFile=%s\n", pData->strUseFile);
-	fprintf(fp, "Switch=%s\n", pData->strSwitch);
+	fprintf(fp, "Author=%s\n", pData->strAuthor);
 	fprintf(fp, "Project=%s\n", pData->strProject);
 	fprintf(fp, "Domain=%s\n", pData->strDomain);
-	fprintf(fp, "CachePath=%s\n", pData->strCachePath);
-	fprintf(fp, "CachePort=%s\n", pData->strCachePort);
-	fprintf(fp, "CacheID=%s\n", pData->strCacheID);
+
+	fprintf(fp, "LessXtcpID=%s\n", pData->strLessXtcpID);
+	fprintf(fp, "TrojanPort=%s\n", pData->strTrojanPort);
+	fprintf(fp, "TrojanPass=%s\n", pData->strTrojanPass);
+	fprintf(fp, "LessWsID=%s\n", pData->strLessWsID);
+	fprintf(fp, "LessWsPath=%s\n", pData->strLessWsPath);
+	fprintf(fp, "LessWsPort=%s\n", pData->strLessWsPort);
+	fprintf(fp, "MessTcpID=%s\n", pData->strMessTcpID);
+	fprintf(fp, "MessTcpPath=%s\n", pData->strMessTcpPath);
+	fprintf(fp, "MessTcpPort=%s\n", pData->strMessTcpPort);
+	fprintf(fp, "MessWsID=%s\n", pData->strMessWsID);
+	fprintf(fp, "MessWsPath=%s\n", pData->strMessWsPath);
+	fprintf(fp, "MessWsPort=%s\n", pData->strMessWsPort);
 
 	fclose(fp);
 }
@@ -174,9 +280,13 @@ int GetInputNumber()
 
 bool MakeDepend(struct BemrayData* pData)
 {
-	printf("Enter Work Mode:\n    [1]    domain\n    [2]    project\n    [3]    both\n    [others]    neither\n");
+	printf("Enter Work Mode:\n");
+	printf("1.domain\n");
+	printf("2.project\n");
+	printf("3.both\n");
+	printf("0.neither\n");
 	int nInput = GetInputNumber();
-	
+
 	char strDomainBash[128] = "domain.sh";
 	char strProjectBash[128] = "project.sh";
 	//install dependencies
@@ -188,7 +298,7 @@ bool MakeDepend(struct BemrayData* pData)
 	if (nInput == 1 || nInput == 3)
 	{
 		fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strDomainBash, strDomainBash);
-		fprintf(fp, "sed -i \"s/YourDomain/%s/g\" %s\n", pData->strDomain, strDomainBash);
+		fprintf(fp, "sed -i \"s/DomainName/%s/g\" %s\n", pData->strDomain, strDomainBash);
 		fprintf(fp, "bash domain.sh\n");
 		fprintf(fp, "rm domain.sh\n");
 		printf("domain.sh is on the way!\n");
@@ -196,8 +306,8 @@ bool MakeDepend(struct BemrayData* pData)
 	if (nInput == 2 || nInput == 3)
 	{
 		fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strProjectBash, strProjectBash);
-		fprintf(fp, "sed -i \"s/YourProject/%s/g\" %s\n", pData->strProject, strProjectBash);
-		fprintf(fp, "sed -i \"s/YourSwitch/%s/g\" %s\n", pData->strSwitch, strProjectBash);
+		fprintf(fp, "sed -i \"s/ProjectName/%s/g\" %s\n", pData->strProject, strProjectBash);
+		fprintf(fp, "sed -i \"s/AuthorName/%s/g\" %s\n", pData->strAuthor, strProjectBash);
 		fprintf(fp, "bash project.sh\n");
 		fprintf(fp, "rm project.sh\n");
 		printf("project.sh is on the way!\n");
@@ -223,26 +333,40 @@ bool MakeModify(struct BemrayData* pData)
 	fprintf(fp, "echo \"Download new default.conf\"\n");
 	fprintf(fp, "wget -O $NginxDefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/new.conf\n");
 	fprintf(fp, "echo \"Fill Custom Setting\"\n");
-	fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxDefaultFile\n", pData->strDomain);
+	fprintf(fp, "sed -i \"s/DomainName/%s/g\" $NginxDefaultFile\n", pData->strDomain);
 
 	fprintf(fp, "echo \"Delete Old Nginx Custom Config File!\"\n");
 	fprintf(fp, "rm -f $NginxCustomFile\n");
 	fprintf(fp, "echo \"Download new custom.conf\"\n");
 	fprintf(fp, "wget -O $NginxCustomFile https://raw.githubusercontent.com/MuscleEagle/bem/main/custom.conf\n");
 	fprintf(fp, "echo \"Fill Custom Setting\"\n");
-	fprintf(fp, "sed -i \"s/YourDomainName/%s/g\" $NginxCustomFile\n", pData->strDomain);
-	fprintf(fp, "sed -i \"s/YourCachePath/%s/g\" $NginxCustomFile\n", pData->strCachePath);
-	fprintf(fp, "sed -i \"s/YourPort/%s/g\" $NginxCustomFile\n", pData->strCachePort);
+	fprintf(fp, "sed -i \"s/DomainName/%s/g\" $NginxCustomFile\n", pData->strDomain);
+	fprintf(fp, "sed -i \"s/LessWsPath/%s/g\" $NginxCustomFile\n", pData->strLessWsPath);
+	fprintf(fp, "sed -i \"s/LessWsPort/%s/g\" $NginxCustomFile\n", pData->strLessWsPort);
+	fprintf(fp, "sed -i \"s/MessTcpPath/%s/g\" $NginxCustomFile\n", pData->strMessTcpPath);
+	fprintf(fp, "sed -i \"s/MessTcpPort/%s/g\" $NginxCustomFile\n", pData->strMessTcpPort);
+	fprintf(fp, "sed -i \"s/MessWsPath/%s/g\" $NginxCustomFile\n", pData->strMessWsPath);
+	fprintf(fp, "sed -i \"s/MessWsPort/%s/g\" $NginxCustomFile\n", pData->strMessWsPort);
 
 	fprintf(fp, "echo \"Download new config.json\"\n");
 	fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
 	fprintf(fp, "echo \"Fill Custom Setting\"\n");
 
-	fprintf(fp, "sed -i \"s/YourProject/%s/g\" $DefaultFile\n", pData->strProject);
-	fprintf(fp, "sed -i \"s/YourDomain/%s/g\" $DefaultFile\n", pData->strDomain);
-	fprintf(fp, "sed -i \"s/YourPathWS/%s/g\" $DefaultFile\n", pData->strCachePath);
-	fprintf(fp, "sed -i \"s/YourPortWS/%s/g\" $DefaultFile\n", pData->strCachePort);
-	fprintf(fp, "sed -i \"s/YourIdWS/%s/g\" $DefaultFile\n", pData->strCacheID);
+	fprintf(fp, "sed -i \"s/ProjectName/%s/g\" $DefaultFile\n", pData->strProject);
+	fprintf(fp, "sed -i \"s/DomainName/%s/g\" $DefaultFile\n", pData->strDomain);
+
+	fprintf(fp, "sed -i \"s/LessXtcpID/%s/g\" $DefaultFile\n", pData->strLessXtcpID);
+	fprintf(fp, "sed -i \"s/TrojanPort/%s/g\" $DefaultFile\n", pData->strTrojanPort);
+	fprintf(fp, "sed -i \"s/TrojanPass/%s/g\" $DefaultFile\n", pData->strTrojanPass);
+	fprintf(fp, "sed -i \"s/LessWsID/%s/g\" $DefaultFile\n", pData->strLessWsID);
+	fprintf(fp, "sed -i \"s/LessWsPath/%s/g\" $DefaultFile\n", pData->strLessWsPath);
+	fprintf(fp, "sed -i \"s/LessWsPort/%s/g\" $DefaultFile\n", pData->strLessWsPort);
+	fprintf(fp, "sed -i \"s/MessTcpID/%s/g\" $DefaultFile\n", pData->strMessTcpID);
+	fprintf(fp, "sed -i \"s/MessTcpPath/%s/g\" $DefaultFile\n", pData->strMessTcpPath);
+	fprintf(fp, "sed -i \"s/MessTcpPort/%s/g\" $DefaultFile\n", pData->strMessTcpPort);
+	fprintf(fp, "sed -i \"s/MessWsID/%s/g\" $DefaultFile\n", pData->strMessWsID);
+	fprintf(fp, "sed -i \"s/MessWsPath/%s/g\" $DefaultFile\n", pData->strMessWsPath);
+	fprintf(fp, "sed -i \"s/MessWsPort/%s/g\" $DefaultFile\n", pData->strMessWsPort);
 
 	fclose(fp);
 	return true;
