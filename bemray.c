@@ -238,6 +238,7 @@ bool MakeModify(struct BemrayData* pData)
 	fprintf(fp, "wget -O $DefaultFile https://raw.githubusercontent.com/MuscleEagle/bem/main/config.json\n");
 	fprintf(fp, "echo \"Fill Custom Setting\"\n");
 
+	fprintf(fp, "sed -i \"s/YourProject/%s/g\" $DefaultFile\n", pData->strProject);
 	fprintf(fp, "sed -i \"s/YourDomain/%s/g\" $DefaultFile\n", pData->strDomain);
 	fprintf(fp, "sed -i \"s/YourPathWS/%s/g\" $DefaultFile\n", pData->strCachePath);
 	fprintf(fp, "sed -i \"s/YourPortWS/%s/g\" $DefaultFile\n", pData->strCachePort);
