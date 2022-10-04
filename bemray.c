@@ -176,14 +176,7 @@ bool MakeDepend(struct BemrayData* pData)
 {
 	printf("Enter Work Mode:\n    [1]    domain\n    [2]    project\n    [3]    both\n    [others]    neither\n");
 	int nInput = GetInputNumber();
-
-	char strSwitchOn[128];
-	int nSwitch = strlen(pData->strProject) - strlen(pData->strSwitch);
-	if (nSwitch > 0)
-	{
-		strncpy(strSwitchOn, pData->strProject, nSwitch);
-		strcpy(strSwitchOn + nSwitch, pData->strSwitch);
-	}
+	
 	char strDomainBash[128] = "domain.sh";
 	char strProjectBash[128] = "project.sh";
 	//install dependencies
@@ -204,7 +197,7 @@ bool MakeDepend(struct BemrayData* pData)
 	{
 		fprintf(fp, "wget -O %s https://raw.githubusercontent.com/MuscleEagle/bem/main/%s\n", strProjectBash, strProjectBash);
 		fprintf(fp, "sed -i \"s/YourProject/%s/g\" %s\n", pData->strProject, strProjectBash);
-		fprintf(fp, "sed -i \"s/YourSwitch/%s/g\" %s\n", strSwitchOn, strProjectBash);
+		fprintf(fp, "sed -i \"s/YourSwitch/%s/g\" %s\n", pData->strSwitch, strProjectBash);
 		fprintf(fp, "bash project.sh\n");
 		fprintf(fp, "rm project.sh\n");
 		printf("project.sh is on the way!\n");
