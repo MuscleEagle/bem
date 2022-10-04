@@ -189,7 +189,7 @@ void initData(struct BemrayData* pData)
 	strcpy(pData->strDependFile, "depend.sh");
 	strcpy(pData->strModifyFile, "modify.sh");
 	strcpy(pData->strUseFile, "false");
-	strcpy(pData->strAuthor, "fly");
+	strcpy(pData->strAuthor, "XTLS");
 	strcpy(pData->strProject, "bemray");
 	strcpy(pData->strDomain, "bemray.com");
 
