@@ -310,6 +310,10 @@ bool MakeDepend(struct BemrayData* pData)
 		fprintf(fp, "sed -i \"s/AuthorName/%s/g\" %s\n", pData->strAuthor, strProjectBash);
 		fprintf(fp, "bash project.sh\n");
 		fprintf(fp, "rm project.sh\n");
+		fprintf(fp, "systemctl restart nginx\n");
+		fprintf(fp, "systemctl restart %s\n", pData->strProject);
+		fprintf(fp, "systemctl enable nginx\n");
+		fprintf(fp, "systemctl enable %s\n", pData->strProject);
 		printf("project.sh is on the way!\n");
 	}
 	fclose(fp);
