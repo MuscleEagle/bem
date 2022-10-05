@@ -70,3 +70,19 @@ case $inputC in
 esac
 
 echo "Install finish！"
+
+read -r -p "Reboot now?  [Y/n] " inputD
+case $inputD in
+    [yY][eE][sS]|[yY])
+		reboot
+		;;
+
+    [nN][oO]|[nN])
+		echo "Reboot later!"
+       		;;
+
+    *)
+		echo "Reboot later!"
+		exit 1
+		;;
+esac
