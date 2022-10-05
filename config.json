@@ -49,8 +49,8 @@
                     ],
                     "certificates": [
                         {
-                            "certificateFile": "/root/.acme.sh/YourDomain/fullchain.cer", // 换成你的证书，绝对路径
-                            "keyFile": "/root/.acme.sh/YourDomain/YourDomain.key" // 换成你的私钥，绝对路径
+                            "certificateFile": "/root/.acme.sh/DomainName/fullchain.cer", // 换成你的证书，绝对路径
+                            "keyFile": "/root/.acme.sh/DomainName/DomainName.key" // 换成你的私钥，绝对路径
                         }
                     ]
                 }
