@@ -1,9 +1,5 @@
 {
     "log": {
-
-        "loglevel": "warning"
-    },
-    "log": {
         "access": "/var/log/ProjectName/access.log",
         "error": "/var/log/ProjectName/error.log",
         "loglevel": "warning"
