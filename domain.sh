@@ -27,7 +27,7 @@ NginxDefaultFile="/etc/nginx/conf.d/default.conf"
 
 echo "server {" > $NginxDefaultFile
 echo "    listen        80;" >> $NginxDefaultFile
-echo "    server_name   YourDomain;" >> $NginxDefaultFile
+echo "    server_name   DomainName;" >> $NginxDefaultFile
 echo "    location / {" >> $NginxDefaultFile
 echo "        root   /usr/share/nginx/html;" >> $NginxDefaultFile
 echo "        index  index.html index.htm;" >> $NginxDefaultFile
