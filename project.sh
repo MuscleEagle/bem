@@ -1,4 +1,4 @@
-echo "Install YourProject!"
-bash -c "$(curl -L https://github.com/AuthorName/fhs-install-ProjectName/raw/main/install-release.sh)" @ install
-bash -c "$(curl -L https://github.com/AuthorName/fhs-install-ProjectName/raw/main/install-release.sh)" @ install-geodata
-echo "YourProject is ready!"
+echo "Install ProjectName!"
+bash <(curl -L https://raw.githubusercontent.com/Author/fhs-install-ProjectName/master/install-release.sh)
+bash <(curl -L https://raw.githubusercontent.com/Author/fhs-install-ProjectName/master/install-dat-release.sh)
+echo "ProjectName is ready!"
