@@ -42,7 +42,7 @@ echo "Restart nginx!"
 systemctl restart nginx
 
 echo "Install ACME!"
-wget -O -  https://get.acme.sh | sh -s email=admin@DomainName
+wget --no-check-certificate -O -  https://get.acme.sh | sh -s email=admin@DomainName
 /root/.acme.sh/acme.sh --issue  -d DomainName   --nginx
 /root/.acme.sh/acme.sh --upgrade --auto-upgrade
 echo "ACME is ready!"
