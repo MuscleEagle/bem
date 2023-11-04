@@ -33188,6 +33188,7 @@ koofun.com
 kookong.com
 koolbao.com
 koolcenter.com
+koolddns.com
 kooldns.com
 koolearn.com
 koolproxy.com
@@ -39362,6 +39363,7 @@ ngocn.net
 ngoos.org
 ngportal.cdnetworks.com
 ngrok.cc
+ngrok.wang
 ngsxzfw.com
 ngty556.com
 ngui.cc
