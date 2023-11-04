@@ -263,7 +263,7 @@ get_white(){
 }
 
 get_whitenew(){
-	# 1. process
+ 	# 1. process
 	echo -e "[Local Hosts]\n## China mainland domains\n## Source: https://github.com/felixonmars/dnsmasq-china-list" >WhiteList_new.txt
 	echo -n "## Last update: " >>WhiteList_new.txt
 	echo $CurrentDate >>WhiteList_new.txt
@@ -282,8 +282,8 @@ get_whitenew(){
 		echo "cdn test list same md5!"
 		return
 	fi
- 
-	# 2. update file
+	
+ 	# 2. update file
 	echo update WhiteList_new!
 	cp WhiteList_new.txt ..
 	sed -i "7c $(date +%Y-%m-%d) # $md5sum11 WhiteList_new" ../version1
