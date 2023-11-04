@@ -13,8 +13,8 @@ get_gfwlist(){
 	fi
 
 	# 2. merge
-	cat gfwlist_download.conf gfwlist_fancyss.conf | grep -Ev "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | sed "s/^/server=&\/./g" | sed "s/$/\/127.0.0.1#7913/g" >../gfwlist_merge.conf
-	cat gfwlist_download.conf gfwlist_fancyss.conf | grep -Ev "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | sed "s/^/ipset=&\/./g" | sed "s/$/\/gfwlist/g" >>../gfwlist_merge.conf
+	cat gfwlist_download.conf gfwlist_default.conf | grep -Ev "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | sed "s/^/server=&\/./g" | sed "s/$/\/127.0.0.1#7913/g" >../gfwlist_merge.conf
+	cat gfwlist_download.conf gfwlist_default.conf | grep -Ev "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | sed "s/^/ipset=&\/./g" | sed "s/$/\/gfwlist/g" >>../gfwlist_merge.conf
 
 	# 3. sort
 	sort -k 2 -t. -u ../gfwlist_merge.conf >../gfwlist_tmp.conf
@@ -120,7 +120,7 @@ get_cdn(){
 	
 	# 2.merge
 	cat ../accelerated-domains.china.conf ../apple.china.conf ../google.china.conf | sed '/^#/d' | sed "s/server=\/\.//g" | sed "s/server=\///g" | sed -r "s/\/\S{1,30}//g" | sed -r "s/\/\S{1,30}//g" > ../cdn_download.txt
-	cat cdn_koolcenter.txt ../cdn_download.txt | sort -u > ../cdn_tmp.txt
+	cat cdn_default.txt ../cdn_download.txt | sort -u > ../cdn_tmp.txt
 
 	# 3. compare
 	local md5sum1=$(md5sum ../cdn_tmp.txt | sed 's/ /\n/g' | sed -n 1p)
