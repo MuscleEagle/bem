@@ -232,6 +232,7 @@ get_cdntest(){
 }
 
 get_white(){
+ 	# 1. process
 	sed 's|/114.114.114.114$||' accelerated-domains.china.conf >WhiteList_tmp.txt
 	sed -i 's|\(\.\)|\\\1|g' WhiteList_tmp.txt
 	sed -i 's|server=/|.*\\\b|' WhiteList_tmp.txt
@@ -255,12 +256,14 @@ get_white(){
 		return
 	fi
 	
+ 	# 2. update file
 	echo "update WhiteList!"
 	cp -f WhiteList.txt ../WhiteList.txt
 	sed -i "6c $(date +%Y-%m-%d) # $md5sum7 WhiteList" ../version1
 }
 
 get_whitenew(){
+	# 1. process
 	echo -e "[Local Hosts]\n## China mainland domains\n## Source: https://github.com/felixonmars/dnsmasq-china-list" >WhiteList_new.txt
 	echo -n "## Last update: " >>WhiteList_new.txt
 	echo $CurrentDate >>WhiteList_new.txt
@@ -279,7 +282,8 @@ get_whitenew(){
 		echo "cdn test list same md5!"
 		return
 	fi
-	
+ 
+	# 2. update file
 	echo update WhiteList_new!
 	cp WhiteList_new.txt ..
 	sed -i "7c $(date +%Y-%m-%d) # $md5sum11 WhiteList_new" ../version1
