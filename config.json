@@ -22,6 +22,29 @@
                     "path": "/MessWsPath"
                 }
             }
+        },
+        {
+            "port": MessTcpPort,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [{
+                        "id": "MessTcpID",
+                        "level": 1,
+                        "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "mkcp",
+                "kcpSettings": {
+                   "uplinkCapacity": 5,
+                    "downlinkCapacity": 100,
+                    "congestion": true,
+                    "header": {
+                        "type": "MessTcpPath"
+                    }
+                }
+            }
         }
     ],
     "outbounds": [{
