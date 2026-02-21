@@ -1,16 +1,16 @@
 {
   "gfwlist": {
     "name": "gfwlist.conf",
-    "date": "2026-02-19 04:20",
-    "md5": "61ca4ade087ff9ae61fb65018ef4b9a4",
-    "count": "4141"
+    "date": "2026-02-22 03:53",
+    "md5": "9f42d16b61bbb4d57c56758218714199",
+    "count": "4146"
   },
   "chnroute": {
     "name": "chnroute.txt",
-    "date": "2026-02-21 03:58",
-    "md5": "070e7d5cbdcbffa604b5e5ba3fe06eda",
-    "count": "3907",
-    "count_ip": "282793338"
+    "date": "2026-02-22 03:53",
+    "md5": "0fd9d54d5261f967f7b60791ea616610",
+    "count": "3897",
+    "count_ip": "282790798"
   },
   "cdn_china": {
     "name": "cdn.txt",
