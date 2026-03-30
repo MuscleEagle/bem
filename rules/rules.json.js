@@ -1,8 +1,8 @@
 {
   "gfwlist": {
     "name": "gfwlist.conf",
-    "date": "2026-03-30 10:46",
-    "md5": "b4fd4095bdddf191dd716b9067c4dc90",
+    "date": "2026-03-30 11:00",
+    "md5": "1501afaa1c86e93bce1eff4e3e9511f4",
     "count": "4174"
   },
   "chnroute": {
