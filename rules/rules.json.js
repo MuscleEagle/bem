@@ -7,10 +7,10 @@
   },
   "chnroute": {
     "name": "chnroute.txt",
-    "date": "2026-08-04 04:46",
-    "md5": "1acc98d8df90d7c69d53dfa52acaebd7",
-    "count": "3902",
-    "count_ip": "282539140"
+    "date": "2026-08-05 04:54",
+    "md5": "ba7114a04acab57f5e44c4a79de14e1a",
+    "count": "3903",
+    "count_ip": "282538882"
   },
   "cdn_china": {
     "name": "cdn.txt",
