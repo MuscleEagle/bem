@@ -5,7 +5,7 @@ case $inputA in
 		echo "Yes"
 		apt update
 		apt install vim -y
-		apt install ntpdate -y
+		apt install chrony -y
 		apt install wget -y
 		apt install curl -y
 		apt install gcc -y
@@ -29,8 +29,8 @@ read -r -p "Correct time?  [Y/n] " inputB
 case $inputB in
     [yY][eE][sS]|[yY])
 		echo "Yes"
-		ntpdate cn.pool.ntp.org
-		cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+		timedatectl set-timezone Asia/Shanghai
+		chronyc makestep
 		;;
 
     [nN][oO]|[nN])
