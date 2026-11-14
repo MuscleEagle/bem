@@ -1,14 +1,14 @@
 {
   "gfwlist": {
     "name": "gfwlist.conf",
-    "date": "2026-11-06 08:32",
-    "md5": "0f48d1f4236a6631bef14becb39cc4eb",
-    "count": "4411"
+    "date": "2026-11-14 08:27",
+    "md5": "012a88d444d994a3c3c58aa675dfd088",
+    "count": "4412"
   },
   "chnroute": {
     "name": "chnroute.txt",
-    "date": "2026-11-13 08:41",
-    "md5": "aafc14f2364572356eec23059679fe1d",
+    "date": "2026-11-14 08:27",
+    "md5": "5ce13c6e7ab23fa499f1688b17953690",
     "count": "3884",
     "count_ip": "282570920"
   },
